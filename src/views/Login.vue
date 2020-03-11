@@ -3,7 +3,7 @@
     <div class="login_box">
       <!-- logo -->
       <div class="avatar_box">
-        <img src="../assets/logo.png" alt="logo" />
+        <img src="../assets/img/logo.png" alt="logo" />
       </div>
       <!-- 登录表单区域 -->
       <!-- label-width：给左侧留出的空间,:model是单向绑定从Vue实例中取值，v-model是双向绑定 -->
