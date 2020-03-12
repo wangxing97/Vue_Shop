@@ -43,7 +43,7 @@
             <el-button size="mini" type="danger" icon="el-icon-delete" @click="removeUserById(scope.row.id)"></el-button>
             <!-- 分配权限 -->
             <el-tooltip content="分配权限" placement="top" :enterable="false">
-              <el-button size="mini" type="warning" icon="el-icon-setting"></el-button>
+              <el-button size="mini" type="warning" icon="el-icon-setting" @click="showAlotRightDialog(scope.row)"></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -107,6 +107,31 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="editFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="editUser">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- 分配权限对话框 -->
+    <el-dialog
+      title="分配权限"
+      :visible.sync="alotRightVisible"
+      @close="clearAlotRightDialog"
+      >
+      <div>
+        <p>当前用户姓名：{{ userRole.username }}</p>
+        <p>当前用户角色：{{ userRole.role_name }}</p>
+        <p>分配权限：
+          <el-select v-model="selectedRoleId" placeholder="请选择">
+            <el-option
+              v-for="item in rightsList"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id">
+            </el-option>
+        </el-select>
+       </p>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="alotRightVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirmAlotRight">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -182,8 +207,20 @@ export default {
           { validator: checkMobile, trigger: 'blur' }
         ]
       },
-      // 编辑表单的可见性
-      editFormVisible: false
+      // 编辑表单Dialog的可见性
+      editFormVisible: false,
+      // 分配权限Dialog的可见性
+      alotRightVisible: false,
+      // 分配人基本数据
+      userRole: {
+        id: '',
+        username: '',
+        role_name: ''
+      },
+      // 所有角色列表
+      rightsList: [],
+      // 选中的角色值
+      selectedRoleId: ''
     }
   },
   created() {
@@ -266,6 +303,32 @@ export default {
       }).catch(() => {
         return this.$message.info('已取消删除')
       })
+    },
+    // 显示分配Dialog,并且将数据显示和获取角色列表
+    async showAlotRightDialog(row) {
+      this.userRole.id = row.id
+      this.userRole.username = row.username
+      this.userRole.role_name = row.role_name
+      const { data: res } = await this.$http.get('roles')
+      if (res.meta.status !== 200) return this.$message.error('获取角色失败')
+      this.rightsList = res.data
+      this.alotRightVisible = true
+    },
+    // 提交分配角色
+    async confirmAlotRight() {
+      if (this.selectedRoleId === '') {
+        this.alotRightVisible = false
+        return this.$message.info('角色未变化')
+      }
+      const { data: res } = await this.$http.put(`users/${this.userRole.id}/role`, { rid: this.selectedRoleId })
+      if (res.meta.status !== 200) return this.$message.error('分配角色失败')
+      this.$message.success('分配角色成功')
+      this.alotRightVisible = false
+      this.getUserList()
+    },
+    // 在分配权限对话框关闭时清空选中的角色id
+    clearAlotRightDialog() {
+      this.selectedRoleId = ''
     }
   }
 }
