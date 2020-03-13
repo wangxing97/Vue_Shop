@@ -6,8 +6,15 @@ import Welcome from '../views/Welcome.vue'
 import Users from '../views/user/Users.vue'
 import Roles from '../views/power/Roles.vue'
 import Right from '../views/power/Right.vue'
+import Cate from '../views/goods/Cate.vue'
+// 导入面包屑导航组件
+import BreadCrumb from '../views/components/breadcrumb.vue'
+// 导入插件table组件
+import VueTable from 'vue-table-with-tree-grid'
 Vue.use(VueRouter)
-
+// 注册组件
+Vue.component('breadcrumb', BreadCrumb)
+Vue.component('tree-table', VueTable)
 const routes = [
   {
     path: '/',
@@ -25,7 +32,8 @@ const routes = [
       { path: '/welcome', component: Welcome },
       { path: '/users', component: Users },
       { path: '/roles', component: Roles },
-      { path: '/rights', component: Right }
+      { path: '/rights', component: Right },
+      { path: '/categories', component: Cate }
     ]
   }
 ]

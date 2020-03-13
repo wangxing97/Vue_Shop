@@ -19,7 +19,7 @@
         </el-col>
       </el-row>
       <!-- 角色列表 -->
-      <el-table :data="rolesList">
+      <el-table :data="rolesList" border>
         <el-table-column type="expand">
           <!-- 权限列表 -->
           <template slot-scope="scope">
@@ -112,12 +112,7 @@
 </template>
 
 <script>
-// 引入自定义组件
-import BreadCrumb from '../components/breadcrumb.vue'
 export default {
-  components: {
-    breadcrumb: BreadCrumb
-  },
   data() {
     return {
       // 角色列表数据
@@ -296,6 +291,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.el-table {
+  margin-top: 15px;
+}
 .el-tag {
   margin:8px;
 }
