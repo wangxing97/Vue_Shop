@@ -15,3 +15,6 @@ body,
 .el-card {
   box-shadow: 0 0 2px !important;
 }
+.el-cascader-menu {
+  height: 280px;
+}

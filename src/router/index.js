@@ -7,6 +7,7 @@ import Users from '../views/user/Users.vue'
 import Roles from '../views/power/Roles.vue'
 import Right from '../views/power/Right.vue'
 import Cate from '../views/goods/Cate.vue'
+import Params from '../views/goods/Params.vue'
 // 导入面包屑导航组件
 import BreadCrumb from '../views/components/breadcrumb.vue'
 // 导入插件table组件
@@ -33,7 +34,8 @@ const routes = [
       { path: '/users', component: Users },
       { path: '/roles', component: Roles },
       { path: '/rights', component: Right },
-      { path: '/categories', component: Cate }
+      { path: '/categories', component: Cate },
+      { path: '/params', component: Params }
     ]
   }
 ]
