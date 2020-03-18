@@ -8,14 +8,11 @@ import Roles from '../views/power/Roles.vue'
 import Right from '../views/power/Right.vue'
 import Cate from '../views/goods/Cate.vue'
 import Params from '../views/goods/Params.vue'
-// 导入面包屑导航组件
-import BreadCrumb from '../views/components/breadcrumb.vue'
-// 导入插件table组件
-import VueTable from 'vue-table-with-tree-grid'
+import List from '../views/goods/List.vue'
+import GoodAdd from '../views/goods/GoodAdd.vue'
 Vue.use(VueRouter)
-// 注册组件
-Vue.component('breadcrumb', BreadCrumb)
-Vue.component('tree-table', VueTable)
+// 导入面包屑导航组件
+
 const routes = [
   {
     path: '/',
@@ -35,7 +32,9 @@ const routes = [
       { path: '/roles', component: Roles },
       { path: '/rights', component: Right },
       { path: '/categories', component: Cate },
-      { path: '/params', component: Params }
+      { path: '/params', component: Params },
+      { path: '/goods', component: List },
+      { path: '/goods/add', component: GoodAdd }
     ]
   }
 ]
