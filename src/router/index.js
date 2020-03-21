@@ -11,6 +11,7 @@ import Params from '../views/goods/Params.vue'
 import List from '../views/goods/List.vue'
 import GoodAdd from '../views/goods/GoodAdd.vue'
 import Order from '../views/order/Order.vue'
+import Report from '../views/reports/Report.vue'
 Vue.use(VueRouter)
 // 导入面包屑导航组件
 
@@ -36,7 +37,8 @@ const routes = [
       { path: '/params', component: Params },
       { path: '/goods', component: List },
       { path: '/goods/add', component: GoodAdd },
-      { path: '/orders', component: Order }
+      { path: '/orders', component: Order },
+      { path: '/reports', component: Report }
     ]
   }
 ]
